@@ -1,0 +1,916 @@
+:root {
+  --green: #176f48;
+  --green-dark: #0f4d35;
+  --red: #b3261e;
+  --red-dark: #7f1c17;
+  --maize: #f2b735;
+  --cream: #faf4e5;
+  --cream-deep: #f0dfbd;
+  --tortilla: #dca45d;
+  --lime: #a6c943;
+  --ink: #211711;
+  --brown: #4b2a1d;
+  --muted: #6f5b4d;
+  --white: #fffdf7;
+  --shadow: 0 18px 44px rgba(44, 24, 12, 0.12);
+  --radius: 8px;
+  --header-height: 72px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Bree Serif", Georgia, serif;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: 780px;
+  margin-bottom: 1rem;
+  font-size: clamp(2.45rem, 8vw, 5.9rem);
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5.5vw, 4rem);
+}
+
+h3 {
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+}
+
+p {
+  color: var(--muted);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.section-inner {
+  width: min(100% - 32px, 1180px);
+  margin: 0 auto;
+}
+
+.section-pad {
+  padding: clamp(4rem, 9vw, 7rem) 0;
+  scroll-margin-top: calc(var(--header-height) + 18px);
+}
+
+.section-heading {
+  max-width: 720px;
+  margin: 0 auto clamp(2rem, 6vw, 3.5rem);
+  text-align: center;
+}
+
+.section-heading p:last-child {
+  margin-bottom: 0;
+  font-size: 1.08rem;
+}
+
+.section-kicker,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--red);
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.section-kicker::before,
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 3px;
+  background: var(--maize);
+  border-radius: 99px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--header-height);
+  padding: 0.75rem max(16px, calc((100vw - 1180px) / 2));
+  background: rgba(250, 244, 229, 0.91);
+  border-bottom: 1px solid rgba(75, 42, 29, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 12px 28px rgba(33, 23, 17, 0.08);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.brand span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  display: grid;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(from 120deg, var(--green), var(--maize), var(--red), var(--green));
+  color: var(--white);
+  font-size: 0.74rem;
+  font-weight: 900;
+  box-shadow: inset 0 0 0 3px rgba(255, 253, 247, 0.42);
+}
+
+.primary-nav {
+  position: fixed;
+  inset: var(--header-height) 0 auto;
+  display: grid;
+  gap: 0.15rem;
+  padding: 1rem 16px 1.2rem;
+  background: var(--cream);
+  border-bottom: 1px solid rgba(75, 42, 29, 0.12);
+  box-shadow: 0 22px 36px rgba(33, 23, 17, 0.12);
+  transform: translateY(-130%);
+  transition: transform 220ms ease;
+}
+
+.primary-nav.is-open {
+  transform: translateY(0);
+}
+
+.primary-nav a {
+  padding: 0.85rem 0.35rem;
+  color: var(--brown);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.primary-nav a:hover,
+.primary-nav a:focus-visible {
+  color: var(--red);
+}
+
+.menu-toggle {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  cursor: pointer;
+}
+
+.menu-toggle span:not(.sr-only) {
+  width: 18px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 99px;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.header-call,
+.mobile-call,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.8rem 1.1rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.1;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.header-call {
+  background: var(--red);
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.btn:hover,
+.header-call:hover,
+.mobile-call:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--maize);
+  color: var(--ink);
+  box-shadow: 0 15px 30px rgba(242, 183, 53, 0.24);
+}
+
+.btn-secondary {
+  border-color: rgba(255, 253, 247, 0.58);
+  color: var(--white);
+  background: rgba(255, 253, 247, 0.1);
+}
+
+.btn-outline {
+  border-color: var(--green);
+  color: var(--green-dark);
+  background: var(--white);
+}
+
+.btn-map {
+  background: var(--green);
+  color: var(--white);
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: min(740px, calc(100svh - 96px));
+  padding: clamp(4.5rem, 9vw, 7rem) 0 clamp(3rem, 7vw, 5rem);
+  overflow: hidden;
+  color: var(--white);
+  background:
+    linear-gradient(90deg, rgba(22, 13, 8, 0.88), rgba(22, 13, 8, 0.58) 43%, rgba(22, 13, 8, 0.18)),
+    url("assets/images/hero-comida-mexicana-generado.jpg") center / cover no-repeat;
+  scroll-margin-top: var(--header-height);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 7px;
+  background: linear-gradient(90deg, var(--green), var(--maize), var(--red));
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy {
+  max-width: 720px;
+}
+
+.hero .eyebrow {
+  color: var(--maize);
+}
+
+.hero-text {
+  max-width: 570px;
+  margin-bottom: 1.6rem;
+  color: rgba(255, 253, 247, 0.9);
+  font-size: clamp(1.05rem, 2.4vw, 1.32rem);
+}
+
+.hero-actions,
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.hero-phone {
+  display: inline-flex;
+  margin-top: 1rem;
+  color: rgba(255, 253, 247, 0.9);
+  font-weight: 800;
+}
+
+.about {
+  position: relative;
+  background:
+    linear-gradient(rgba(250, 244, 229, 0.94), rgba(250, 244, 229, 0.96)),
+    url("assets/images/patron-mexicano.jpg") center / 420px repeat;
+}
+
+.about-grid,
+.contact-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.about-copy > p:not(.section-kicker) {
+  max-width: 700px;
+  font-size: 1.05rem;
+}
+
+.feature-list {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.7rem;
+}
+
+.feature-card {
+  padding: 1rem;
+  border: 1px solid rgba(75, 42, 29, 0.12);
+  border-radius: var(--radius);
+  background: rgba(255, 253, 247, 0.85);
+  box-shadow: 0 10px 24px rgba(44, 24, 12, 0.06);
+}
+
+.feature-card h3 {
+  margin-bottom: 0.35rem;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.feature-card p {
+  margin-bottom: 0;
+  font-size: 0.94rem;
+}
+
+.feature-icon {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  color: var(--red);
+  font-size: 0.8rem;
+}
+
+.about-media {
+  position: relative;
+}
+
+.about-media img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.media-note {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  display: grid;
+  gap: 0.1rem;
+  max-width: calc(100% - 1.8rem);
+  padding: 0.8rem 0.95rem;
+  border-radius: var(--radius);
+  background: rgba(33, 23, 17, 0.9);
+  color: var(--white);
+}
+
+.media-note span,
+.media-note a {
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.media-note a {
+  color: var(--maize);
+}
+
+.menu {
+  background: var(--white);
+}
+
+.menu-category {
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.menu-category h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--green-dark);
+}
+
+.menu-category h3::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(23, 111, 72, 0.32), rgba(242, 183, 53, 0));
+}
+
+.menu-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.dish-card {
+  display: grid;
+  gap: 0.9rem;
+  min-height: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(75, 42, 29, 0.12);
+  border-radius: var(--radius);
+  background: var(--cream);
+  box-shadow: 0 10px 28px rgba(44, 24, 12, 0.07);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.dish-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(179, 38, 30, 0.28);
+  box-shadow: 0 18px 38px rgba(44, 24, 12, 0.12);
+}
+
+.dish-title-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.dish-card h4 {
+  margin-bottom: 0.45rem;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.dish-card p {
+  margin-bottom: 0;
+  font-size: 0.94rem;
+}
+
+.price {
+  color: var(--red);
+  font-size: 1.02rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-self: end;
+}
+
+.tag-row span {
+  padding: 0.24rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(23, 111, 72, 0.1);
+  color: var(--green-dark);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.dish-card-highlight {
+  background: linear-gradient(135deg, rgba(242, 183, 53, 0.24), rgba(23, 111, 72, 0.08));
+}
+
+.gallery {
+  background: linear-gradient(180deg, var(--cream), #f7e9c9);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.gallery-item {
+  position: relative;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--brown);
+  box-shadow: 0 14px 28px rgba(44, 24, 12, 0.12);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 280ms ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.045);
+}
+
+.gallery-item figcaption {
+  position: absolute;
+  left: 0.65rem;
+  right: 0.65rem;
+  bottom: 0.65rem;
+  display: inline-flex;
+  width: fit-content;
+  max-width: calc(100% - 1.3rem);
+  padding: 0.42rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(33, 23, 17, 0.78);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.reviews {
+  background: var(--white);
+}
+
+.reviews-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.review-card {
+  padding: 1.15rem;
+  border: 1px solid rgba(75, 42, 29, 0.12);
+  border-radius: var(--radius);
+  background: var(--cream);
+  box-shadow: 0 10px 26px rgba(44, 24, 12, 0.08);
+}
+
+.stars {
+  margin-bottom: 0.8rem;
+  color: var(--maize);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.review-card p {
+  margin-bottom: 1rem;
+  color: var(--brown);
+}
+
+.review-card strong {
+  color: var(--green-dark);
+}
+
+.center-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.contact {
+  color: var(--white);
+  background:
+    linear-gradient(135deg, rgba(33, 23, 17, 0.95), rgba(75, 42, 29, 0.88)),
+    url("assets/images/patron-mexicano.jpg") center / 380px repeat;
+}
+
+.contact .section-kicker,
+.contact p {
+  color: rgba(255, 253, 247, 0.84);
+}
+
+.contact .section-kicker::before {
+  background: var(--maize);
+}
+
+.contact h2 {
+  color: var(--white);
+}
+
+.contact-cards {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.6rem 0;
+}
+
+.contact-cards article {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 253, 247, 0.14);
+  border-radius: var(--radius);
+  background: rgba(255, 253, 247, 0.08);
+}
+
+.contact-cards span {
+  color: var(--maize);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.contact-cards strong,
+.contact-cards a {
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.map-card {
+  position: relative;
+  display: grid;
+  min-height: 330px;
+  align-content: end;
+  padding: 1.35rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 253, 247, 0.14);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 70% 30%, rgba(242, 183, 53, 0.32), transparent 28%),
+    linear-gradient(135deg, rgba(23, 111, 72, 0.92), rgba(15, 77, 53, 0.86)),
+    url("assets/images/patron-mexicano.jpg") center / cover;
+  box-shadow: var(--shadow);
+}
+
+.map-card::before {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(255, 253, 247, 0.2);
+  border-radius: var(--radius);
+}
+
+.map-card span,
+.map-card strong {
+  position: relative;
+  z-index: 1;
+}
+
+.map-pin {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 1rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--maize);
+  box-shadow: 0 16px 28px rgba(33, 23, 17, 0.22);
+}
+
+.map-title {
+  color: var(--white);
+  font-family: "Bree Serif", Georgia, serif;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.map-card strong {
+  margin-top: 1rem;
+  color: var(--maize);
+}
+
+.site-footer {
+  padding: 2.2rem 0 5.4rem;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.site-footer p,
+.site-footer a {
+  color: rgba(255, 253, 247, 0.78);
+}
+
+.site-footer strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: "Bree Serif", Georgia, serif;
+  font-size: 1.45rem;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.footer-links {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.footer-links a:hover {
+  color: var(--maize);
+}
+
+.legal {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.mobile-call {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  z-index: 45;
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 16px 34px rgba(33, 23, 17, 0.22);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 520ms ease, transform 520ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .section-inner {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .brand-mark {
+    flex-basis: 38px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .header-call {
+    display: none;
+  }
+
+  .site-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .hero-actions .btn,
+  .contact-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (min-width: 641px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery-item-large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .gallery-item-large img {
+    aspect-ratio: 1 / 1;
+  }
+
+  .reviews-grid,
+  .feature-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.4fr auto;
+    align-items: start;
+  }
+
+  .legal {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 760px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  .mobile-call {
+    display: none;
+  }
+
+  .site-footer {
+    padding-bottom: 2.2rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .site-header {
+    grid-template-columns: auto 1fr auto;
+    gap: 1.4rem;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .primary-nav {
+    position: static;
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.55rem, 1.5vw, 1.25rem);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .primary-nav a {
+    padding: 0.35rem 0;
+    font-size: 0.94rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .gallery-item-large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
